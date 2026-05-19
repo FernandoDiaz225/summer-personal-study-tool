@@ -351,6 +351,155 @@ code, kbd, .mono {
   gap: 0.4rem;
 }
 
+/* ============ NEW: lesson index + single-lesson page ============ */
+
+.lesson-index {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 0.6rem;
+  margin: 1.5rem 0;
+}
+
+.lesson-index-card {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  padding: 0.9rem 1rem;
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: all 0.15s ease;
+}
+
+.lesson-index-card:hover {
+  background: var(--paper);
+  border-color: var(--accent);
+  transform: translateX(2px);
+}
+
+.lesson-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  flex-shrink: 0;
+}
+
+.lesson-index-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+}
+
+.lesson-page {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.lesson-counter {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.75rem;
+  color: var(--ink-3);
+  letter-spacing: 0.1em;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 3px;
+  background: var(--rule);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.lesson-title {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: "opsz" 144;
+  font-weight: 900;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--ink);
+}
+
+.lesson-section {
+  margin: 2rem 0;
+  padding-bottom: 0.5rem;
+}
+
+.lesson-section h3 {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px dotted var(--rule);
+  margin-top: 0;
+}
+
+.lesson-section p {
+  font-family: 'Fraunces', serif;
+  font-size: 1.08rem;
+  line-height: 1.65;
+  color: var(--ink);
+  max-width: 65ch;
+  white-space: pre-wrap;
+}
+
+.lesson-section .terms {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.lesson-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+}
+
+.lesson-nav .btn {
+  font-size: 0.7rem;
+  max-width: 35%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lesson-nav .btn.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  .lesson-nav { flex-direction: column; }
+  .lesson-nav .btn { max-width: 100%; white-space: normal; text-align: center; }
+}
+
 .term-chip {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.7rem;

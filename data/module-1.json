@@ -1,49 +1,169 @@
 {
   "id": "m1",
-  "title": "Module 1: Intelligent Agents",
+  "title": "Module 1: Agents",
   "overview": "Agents perceive, reason, act. A rational agent picks the action that maximizes its performance measure given what it knows and has seen. Environments differ along six axes. Perception is fast (System 1); reasoning is slow (System 2). Everything in this module connects through one loop: sensor → perceive → reason → act → environment changes → repeat.",
   "lessons": [
     {
       "id": "l1",
-      "title": "1. What is an Agent?",
-      "summary": "An agent is anything that acts in an environment. Thermostats, dogs, robots, humans, companies all count. Agents are judged only by what they DO, not what they are. They have access to exactly 5 things: prior knowledge, stimuli, past experiences, goals/preferences, abilities.",
-      "key_terms": ["agent", "environment", "computational agent", "stimuli", "belief state"]
+      "title": "What is an agent?",
+      "plain": "An agent is just something that does stuff. It senses what's around it, makes some kind of decision, and then takes an action. That's it. A thermostat is an agent (it senses temperature, decides to turn the heater on or off). A dog is an agent. So are you. So is an entire company.",
+      "technical": "In AI, an agent is anything that acts in an environment. It's judged purely by what it DOES, not by what it 'is' on the inside. Two agents that produce the same actions in the same situations are considered equally good — even if one is a robot and the other is a human.",
+      "example": "A Roomba senses the floor with bump sensors, decides which direction to roll, and acts by moving its wheels. A thermostat senses temperature, decides whether the room is too cold, and acts by switching the heater. Even a worm counts — it senses light, decides to move, and acts.",
+      "ai_relevance": "Almost every AI system you'll study in this course is framed as an agent. Search algorithms, neural networks, game-playing AIs — they all fit this pattern of sense → decide → act. The whole class is basically 'how do we build the decide part better?'",
+      "key_terms": ["agent", "environment", "action"]
     },
     {
       "id": "l2",
-      "title": "2. The Perception-Action Loop",
-      "summary": "Sensor input flows from environment to agent. The agent perceives, reasons, then takes an action. The action changes the environment, which produces new sensor input. This loop is the foundation of every other concept in the module.",
-      "key_terms": ["perception", "reasoning", "action", "sensor input"]
+      "title": "What is an environment?",
+      "plain": "The environment is everything outside the agent that the agent can interact with. It's the 'world' the agent lives in. For a chess AI, the environment is the chess board. For a self-driving car, it's the road, other cars, weather, pedestrians — all of it.",
+      "technical": "The environment is the external system the agent perceives and acts upon. The agent + environment together form a 'world.' The environment provides stimuli (sensor input) to the agent, and the agent's actions change the environment's state.",
+      "example": "Picture a robot vacuum. The robot is the agent. The room — walls, furniture, dust, the dog — is the environment. The robot doesn't control the room directly; it can only act on it (by moving, sucking up dust), and the room sends information back (bumping into a chair leg).",
+      "ai_relevance": "Different AI techniques work for different environments. Chess and self-driving cars need wildly different approaches because their environments have totally different properties (which we'll classify in lessons 8–14).",
+      "key_terms": ["environment", "world", "stimuli"]
     },
     {
       "id": "l3",
-      "title": "3. The Rational Agent",
-      "summary": "An agent is RATIONAL if, given a sequence of perceptions and prior knowledge, it picks the action that maximizes its performance measure. Four factors: (1) performance measure, (2) prior knowledge, (3) sequence of perceptions, (4) possible actions. Rational does NOT mean omniscient.",
-      "key_terms": ["rational agent", "performance measure", "prior knowledge", "perceptions", "possible actions"]
+      "title": "The perception–action loop",
+      "plain": "Agents don't just act once and stop. They run in a loop: sense → think → act → the world changes because of your action → sense again → think again → act again. It never stops as long as the agent is running.",
+      "technical": "The perception–action loop is the fundamental cycle of any agent. Sensor input comes in from the environment, the agent perceives and reasons about it, then takes an action. The action modifies the environment, producing new sensor input. Repeat.",
+      "example": "Driving: you see a red light (perceive), realize you need to stop (reason), press the brake (act). The car slows down (environment changes). You see the light turn green (perceive again), and so on. You're running this loop hundreds of times per minute without thinking about it.",
+      "ai_relevance": "Every AI agent you build — from a chess engine to a chatbot — implements some version of this loop. The 'reasoning' step is where most of the AI complexity lives. The rest of this course is essentially: 'here are different ways to do the reasoning step.'",
+      "key_terms": ["perception", "reasoning", "action", "sensor input"]
     },
     {
       "id": "l4",
-      "title": "4. Six Environmental Properties",
-      "summary": "Every environment can be classified on six axes: fully/partially observable, deterministic/nondeterministic, episodic/sequential, static/dynamic, discrete/continuous, known/unknown. Knowing these tells you what kind of AI techniques you'll need.",
-      "key_terms": ["observable", "deterministic", "episodic", "static", "discrete", "known"]
+      "title": "What an agent has access to",
+      "plain": "Agents aren't magic. They can only use 5 things to make a decision. Anything outside this list literally cannot affect what they do.",
+      "technical": "An agent's decision at any moment depends on exactly 5 inputs: (1) Prior knowledge — what was programmed in or learned beforehand. (2) Stimuli — current sensor readings from the environment. (3) Past experiences — history of what it's done and seen. (4) Goals / preferences — what states of the world it prefers. (5) Abilities — what actions it's physically capable of taking.",
+      "example": "Your phone's GPS app: prior knowledge = map data, stimuli = current GPS signal, past experiences = recent traffic patterns it's logged, goals = get you to your destination fast, abilities = it can display routes but can't actually drive the car.",
+      "ai_relevance": "When you're designing or analyzing an AI agent, your first question is always: 'what does this agent know, see, remember, want, and can do?' If you can answer those five, you've defined the agent.",
+      "key_terms": ["prior knowledge", "stimuli", "past experiences", "goals", "abilities"]
     },
     {
       "id": "l5",
-      "title": "5. Classifying Real Environments",
-      "summary": "Chess: fully obs, deterministic, sequential, static, discrete, known. Poker: partial, nondet, sequential, static, discrete, known. Go: full, nondet, sequential, static, discrete, known. Driving: partial, nondet, sequential, dynamic, continuous, unknown. Monopoly: full, nondet, sequential, dynamic, discrete, known. Static image recognition: full, deterministic, episodic, static, continuous, known.",
-      "key_terms": ["chess", "poker", "go", "driving", "monopoly", "image recognition"]
+      "title": "What is a rational agent?",
+      "plain": "A rational agent is one that does the smartest thing it can with what it knows. 'Rational' doesn't mean perfect or all-knowing — it means doing the best possible choice given limited information.",
+      "technical": "An agent is rational if, for any given sequence of perceptions and prior knowledge, it selects the action that maximizes its performance measure. Rationality is relative to what the agent has access to, not to the actual state of the world.",
+      "example": "You're playing poker. You make a bet based on the cards you can see and the players you're up against. You lose. Were you irrational? Not necessarily — if you made the best statistical bet given what you knew, you were rational. The cards you couldn't see don't count against you.",
+      "ai_relevance": "Almost all AI is about building rational agents. We can't build omniscient agents (those don't exist), so 'rational given the information available' is the realistic goal. This bar shows up again in machine learning, search, and decision theory later in the course.",
+      "key_terms": ["rational agent", "performance measure"]
     },
     {
       "id": "l6",
-      "title": "6. Thinking Fast and Slow",
-      "summary": "Kahneman's dual-system theory. System 1 = fast, automatic, no effort (recognizing colors, faces). System 2 = slow, effortful, deliberate (math, planning, breaking a code). Both systems work together — System 1 handles routine perception, System 2 kicks in for hard problems.",
-      "key_terms": ["System 1", "System 2", "Kahneman", "dual process"]
+      "title": "The 4 factors of a rational agent",
+      "plain": "To know if an agent is being rational, you need to look at 4 specific things. Memorize these — this is one of the most testable things in the module.",
+      "technical": "A rational agent's behavior is defined by exactly 4 factors: (1) Performance measure — how you grade its success (e.g., 'win the game'). (2) Prior knowledge — what it already knows about the world. (3) Sequence of perceptions — everything it has sensed so far. (4) Possible actions — what it can physically do.",
+      "example": "Chess AI. Performance measure = winning. Prior knowledge = the rules of chess and opening theory. Perceptions = the current board state and move history. Possible actions = any legal chess move. The AI is rational if it picks the move most likely to win, given all four.",
+      "ai_relevance": "When you analyze any AI system on an exam, this is the framework. 'What's it trying to maximize? What does it know? What has it seen? What can it do?' Answer these four and you've fully specified the agent.",
+      "key_terms": ["performance measure", "prior knowledge", "perceptions", "possible actions"]
     },
     {
       "id": "l7",
-      "title": "7. Connecting Systems to Agents",
-      "summary": "In an agent-based system: PERCEPTION ≈ System 1 (fast, e.g., CNNs interpreting sensor input). REASONING ≈ System 2 (slow, e.g., propositional logic, planning). Modern AI combines both — fast pattern recognition feeds slow symbolic reasoning. This is the whole point of the module: it ties the agent loop to cognitive science.",
+      "title": "Rational ≠ omniscient",
+      "plain": "An agent can be rational and still fail. Being rational just means making the best call with the info you've got. If something unexpected happens that you couldn't have predicted, that doesn't make you irrational.",
+      "technical": "Omniscient means knowing everything, including the future. Rational means optimal given current knowledge. No real agent is omniscient (humans aren't, AIs aren't). The standard for 'good AI' is rational, not perfect.",
+      "example": "A self-driving car comes to a green light, proceeds through the intersection, and gets hit by a driver running a red light. The AI was rational — it had no way to know the other driver would run the light. It made the right call with available info.",
+      "ai_relevance": "This is why we measure AI by expected performance, not absolute outcomes. Reinforcement learning agents are evaluated on long-run reward, not whether they ever lose. Same standard.",
+      "key_terms": ["omniscient", "rational", "limited information"]
+    },
+    {
+      "id": "l8",
+      "title": "Environmental properties: the big idea",
+      "plain": "Not all environments are the same. A chess board and a busy highway are totally different problems for an AI. To classify any environment, we look at 6 specific yes/no questions about it. The next 6 lessons cover one property each.",
+      "technical": "Every environment can be classified along six axes: (1) Fully vs. partially observable. (2) Deterministic vs. nondeterministic. (3) Episodic vs. sequential. (4) Static vs. dynamic. (5) Discrete vs. continuous. (6) Known vs. unknown.",
+      "example": "If I ask 'is chess a hard AI problem?', the answer depends on these 6 things. Chess turns out to be fully observable, deterministic, sequential, static, discrete, and known — that's actually a 'friendly' environment, which is why AI cracked it earlier than driving (which is the opposite on most axes).",
+      "ai_relevance": "Knowing the environment type tells you which AI techniques can even apply. Search algorithms (later in the course) need known + deterministic environments. Reinforcement learning is for unknown ones. Bayesian methods are for partially observable / nondeterministic ones. This classification is foundational.",
+      "key_terms": ["six properties", "environment classification"]
+    },
+    {
+      "id": "l9",
+      "title": "Property 1: Fully vs. partially observable",
+      "plain": "Can the agent see everything that matters, or only some of it? Chess: you see the whole board, nothing's hidden. Poker: you see your cards but not anyone else's — most of the game state is hidden.",
+      "technical": "An environment is fully observable if the agent's sensors give it access to the complete state of the environment at every step. It's partially observable if some parts are hidden, noisy, or missing.",
+      "example": "Fully observable: chess (every piece visible to both players), tic-tac-toe, sudoku. Partially observable: poker (opponents' cards hidden), real-world driving (you can't see what's behind that truck), any video game with fog-of-war.",
+      "ai_relevance": "Partial observability makes problems much harder. The agent has to guess at the hidden state, usually by tracking probabilities. This is why poker AIs use techniques like counterfactual regret minimization while chess AIs can use simpler tree search.",
+      "key_terms": ["fully observable", "partially observable", "hidden state"]
+    },
+    {
+      "id": "l10",
+      "title": "Property 2: Deterministic vs. nondeterministic",
+      "plain": "If you do the same action in the same situation, do you always get the same result? In chess, moving your knight to f3 always puts the knight on f3 — no surprises. In Monopoly, rolling the dice introduces randomness. You can't predict the outcome of a single action with certainty.",
+      "technical": "An environment is deterministic if the next state is completely determined by the current state and the agent's action — no randomness involved. It's nondeterministic (or stochastic) if the same action in the same state can produce different outcomes.",
+      "example": "Deterministic: chess, sudoku, robot arm in a controlled lab. Nondeterministic: rolling dice in Monopoly, drawing cards in poker, real-world driving (a pedestrian might step out unexpectedly). Note on the slides: the course slides treat Go as 'nondeterministic' even though Go itself has no dice. They're capturing the idea that the opponent's strategy introduces effective uncertainty. Memorize what the slide table says for the exam.",
+      "ai_relevance": "Deterministic environments let you plan with certainty — search algorithms can map out exact futures. Nondeterministic ones require probability: Markov Decision Processes, Bayesian methods, expectation maximization. The whole 'Uncertainty' unit (Modules 9–12) exists because of this property.",
+      "key_terms": ["deterministic", "nondeterministic", "stochastic", "randomness"]
+    },
+    {
+      "id": "l11",
+      "title": "Property 3: Episodic vs. sequential",
+      "plain": "Does what you did before matter? In a chess game, every move depends on the moves before it — your last 20 moves shaped the current board. But if you're classifying photos one at a time, classifying photo #5 doesn't depend on photos #1–4 at all. Each one is its own little 'episode.'",
+      "technical": "An environment is episodic if the agent's experience is divided into independent episodes, where each decision doesn't depend on previous actions. It's sequential if past actions affect future decisions and outcomes.",
+      "example": "Episodic: sorting parcels on a conveyor belt (each parcel is its own decision), classifying images, spam filtering one email at a time. Sequential: chess, driving, conversation, anything with memory or consequences.",
+      "ai_relevance": "Episodic problems are simpler — you can solve each instance independently. That's why image classification was an 'early win' for deep learning. Sequential problems need agents that plan ahead and remember context — that's where reinforcement learning and planning algorithms come in.",
+      "key_terms": ["episodic", "sequential", "independent decisions"]
+    },
+    {
+      "id": "l12",
+      "title": "Property 4: Static vs. dynamic",
+      "plain": "Does the world wait for you to think, or does it keep changing while you're deciding? In chess, the board sits there while you take 5 minutes to plan your move. In driving, a kid could run into the street while you're still deciding whether to slow down.",
+      "technical": "A static environment doesn't change while the agent is deliberating. A dynamic environment can change on its own — independent of the agent — including while the agent is making a decision.",
+      "example": "Static: chess (the opponent waits), sudoku, crossword puzzles. Dynamic: driving (other cars don't pause), real-time video games, stock trading, conversation (the other person keeps talking).",
+      "ai_relevance": "Dynamic environments force agents to act under time pressure — you can't take forever to compute the perfect answer. This shifts the design toward fast approximate reasoning (often System 1–style, which we'll see soon) over slow exhaustive search.",
+      "key_terms": ["static", "dynamic", "deliberation time"]
+    },
+    {
+      "id": "l13",
+      "title": "Property 5: Discrete vs. continuous",
+      "plain": "Are there a countable number of possible states, or infinite? A chess board has a huge but countable number of positions (you could in principle list them all). A photograph has effectively infinite possible pixel values — you can't list 'all possible images.'",
+      "technical": "A discrete environment has a finite (or countable) number of possible states, actions, or time steps. A continuous environment has an infinite, uncountable range — typically real-valued measurements like positions, speeds, or pixel intensities.",
+      "example": "Discrete: chess board positions, Monopoly squares, dice outcomes, text characters. Continuous: driving (car position is a real number on a road), image pixels (millions of possible color values per pixel), audio waveforms, robot joint angles.",
+      "ai_relevance": "Discrete environments fit naturally with search trees and symbolic logic. Continuous environments require techniques that handle real numbers: neural networks, calculus-based optimization, Kalman filters. This split shows up everywhere in AI.",
+      "key_terms": ["discrete", "continuous", "finite states", "real-valued"]
+    },
+    {
+      "id": "l14",
+      "title": "Property 6: Known vs. unknown",
+      "plain": "Does the agent know the 'rules of the game' going in, or does it have to figure them out by trial and error? A chess AI ships with the rules of chess built in. A robot dropped into a new house has to discover what the rooms look like by exploring.",
+      "technical": "An environment is known if the agent has prior knowledge of how the environment works — what actions cause what outcomes, what the rules and dynamics are. It's unknown if the agent must learn this through experience, a process called exploration.",
+      "example": "Known: chess (rulebook is fixed), Sudoku, any board game. Unknown: a brand-new video game you've never played, a robot in an unfamiliar building, real-world driving in a city you've never visited.",
+      "ai_relevance": "Known environments suit planning and search. Unknown environments require learning algorithms — especially reinforcement learning, where the agent explores, gets feedback, and gradually learns what works. This is the bridge between Unit 2 (Search) and Unit 4 (Machine Learning).",
+      "key_terms": ["known", "unknown", "exploration"]
+    },
+    {
+      "id": "l15",
+      "title": "Classifying real environments (the reference table)",
+      "plain": "Now that you know all 6 properties, you should be able to classify any environment on all 6 axes. The slides give a reference table of 6 example environments — memorize this table, it's heavily testable.",
+      "technical": "From the lecture table — Chess: fully observable, deterministic, sequential, static, discrete, known. Poker: partially observable, nondeterministic, sequential, static, discrete, known. Go: fully observable, nondeterministic, sequential, static, discrete, known. Driving: partially observable, nondeterministic, sequential, dynamic, continuous, unknown. Monopoly: fully observable, nondeterministic, sequential, dynamic, discrete, known. Static image recognition: fully observable, deterministic, episodic, static, continuous, known.",
+      "example": "Notice the pattern: chess is 'friendly' on every axis except one or two. Driving is hostile on almost every axis (partial, nondeterministic, dynamic, continuous, unknown) — that's why self-driving cars are still hard while chess was solved in the 90s.",
+      "ai_relevance": "If you can classify a new environment on these 6 axes, you can immediately predict which AI techniques will work. That's the whole point of this framework — it's a diagnostic tool for choosing the right approach.",
+      "key_terms": ["chess", "poker", "go", "driving", "monopoly", "image recognition"]
+    },
+    {
+      "id": "l16",
+      "title": "Thinking Fast and Slow: the idea",
+      "plain": "Daniel Kahneman, a psychologist, noticed that your brain has two different 'modes' of thinking. One is fast and automatic (recognizing a friend's face). The other is slow and effortful (multiplying 17 × 24 in your head). He called these System 1 and System 2.",
+      "technical": "System 1 operates automatically and quickly, with little or no effort and no sense of voluntary control. System 2 allocates attention to effortful mental activities — complex computation, deliberate choice, concentration.",
+      "example": "System 1: 'What color is the sky?' — you answered instantly without thinking. System 2: 'What's 17 × 24?' — you had to slow down, maybe break it into steps. Same brain, two different modes.",
+      "ai_relevance": "This is a psychology theory, but AI researchers find it useful as a framework: AI systems also need both fast pattern recognition AND slow deliberate reasoning. The next lesson maps this directly onto agent architecture.",
+      "key_terms": ["System 1", "System 2", "Kahneman", "dual-process theory"]
+    },
+    {
+      "id": "l17",
+      "title": "System 1 / System 2 in agents",
+      "plain": "In an AI agent, perception (interpreting sensor input) is fast and automatic — like System 1. Reasoning (planning, inferring, deciding) is slow and deliberate — like System 2. Most modern AI systems combine both.",
+      "technical": "In agent-based architectures: Perception is like System 1 — fast, often pattern-matching (e.g., CNNs interpreting camera input). Reasoning is like System 2 — slow, inference-based (e.g., propositional logic, planning, search).",
+      "example": "A self-driving car: it uses a CNN (System 1–style) to recognize 'that's a stop sign' in milliseconds. Then a slower planning module (System 2–style) decides: 'given that stop sign, plan a deceleration that's safe for the car behind me.' Two systems, working together.",
+      "ai_relevance": "This is the unifying idea of the module: agents do both perception and reasoning. Unit 1 (logic) and Unit 2 (search) focus on System 2–style reasoning. Unit 5 (deep learning) focuses on System 1–style perception. The most powerful AI systems combine them.",
       "key_terms": ["perception as System 1", "reasoning as System 2", "CNN", "propositional logic"]
+    },
+    {
+      "id": "l18",
+      "title": "How it all connects",
+      "plain": "Everything in this module is one big loop. An agent perceives the environment (fast, System 1), reasons about it (slow, System 2), picks the action that maximizes its performance measure (rationality), and acts on the environment. The environment changes — and the loop runs again. The 6 environmental properties tell you what kind of agent design works best for your particular world.",
+      "technical": "The full picture: Agent (with 5 inputs: prior knowledge, stimuli, past experiences, goals, abilities) runs the perception–action loop. Its goal is rationality (maximize performance measure given 4 factors). The right agent design depends on the environment's 6 properties. Perception and reasoning correspond to System 1 and System 2.",
+      "example": "Self-driving car. Agent inputs: map data, camera/lidar feeds, history of past trips, goal of 'reach destination safely,' ability to steer/accelerate/brake. Loop: perceives the road (System 1, fast CNNs), reasons about the right action (System 2, planning), acts. Environment is partially observable, nondeterministic, sequential, dynamic, continuous, unknown — which is why it's hard.",
+      "ai_relevance": "Every later module in this course slots into this framework. Search (Unit 2) is a tool for the reasoning step. Uncertainty (Unit 3) handles nondeterministic / partially observable environments. ML (Unit 4) handles unknown environments. Deep learning (Unit 5) handles perception. It all hangs off this scaffolding.",
+      "key_terms": ["full picture", "synthesis", "course roadmap"]
     }
   ],
   "flashcards": [

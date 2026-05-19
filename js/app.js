@@ -36,7 +36,7 @@ function parseHash() {
   //          /m1/match
   //          /m1/review
   //          /m1/overview
-  return { moduleId: parts[0] || null, mode: parts[1] || null };
+  return { moduleId: parts[0] || null, mode: parts[1] || null, sub: parts[2] || null };
 }
 
 window.addEventListener('hashchange', render);
@@ -72,14 +72,14 @@ async function loadModule(id) {
 async function render() {
   const root = document.getElementById('app');
   root.innerHTML = '<div class="empty-state">Loading…</div>';
-  const { moduleId, mode } = parseHash();
+  const { moduleId, mode, sub } = parseHash();
   await ensureCourse();
   if (!moduleId) return renderHome(root);
   const mod = await loadModule(moduleId);
   if (!mod) return renderStub(root, moduleId);
   if (!mode) return renderModule(root, mod);
   switch (mode) {
-    case 'overview':    return renderOverview(root, mod);
+    case 'overview':    return renderOverview(root, mod, sub);
     case 'flashcards':  return renderFlashcards(root, mod);
     case 'quiz':        return renderQuiz(root, mod);
     case 'recall':      return renderRecall(root, mod);
@@ -168,7 +168,7 @@ function renderModule(root, mod) {
       <a class="mode-btn" href="#/${mod.id}/overview">
         <div class="mode-label">01 · Read</div>
         <div class="mode-name">Lessons</div>
-        <div class="mode-desc">${mod.lessons.length} bite-sized chunks. Start here for first pass.</div>
+        <div class="mode-desc">${mod.lessons.length} bite-sized lessons · click through one at a time. Start here for first pass.</div>
       </a>
       <a class="mode-btn" href="#/${mod.id}/flashcards">
         <div class="mode-label">02 · Drill</div>
@@ -213,22 +213,102 @@ window.resetProgress = function(modId) {
 };
 
 // ====================================================
-// OVERVIEW (lessons)
+// OVERVIEW (lessons) — one-at-a-time navigable flow
+// Sub-route /overview     → index page (all lessons listed)
+// Sub-route /overview/N   → lesson N (1-indexed)
 // ====================================================
-function renderOverview(root, mod) {
-  root.innerHTML = `
-    ${crumbs(mod.title, 'Lessons')}
-    <h1>Lessons</h1>
-    <p class="lede">${escapeHTML(mod.overview)}</p>
-    ${mod.lessons.map(l => `
-      <div class="lesson">
-        <h4>${escapeHTML(l.title)}</h4>
-        <p>${escapeHTML(l.summary)}</p>
-        <div class="terms">${l.key_terms.map(t => `<span class="term-chip">${escapeHTML(t)}</span>`).join('')}</div>
+function renderOverview(root, mod, sub) {
+  // index page: list all lessons as clickable cards
+  if (!sub) {
+    root.innerHTML = `
+      ${crumbs(mod.title, 'Lessons')}
+      <h1>Lessons</h1>
+      <p class="lede">${escapeHTML(mod.overview)}</p>
+      <p class="muted mono" style="font-size:0.75rem; margin-top:1rem;">${mod.lessons.length} bite-sized lessons · click any to start, or jump to the first one.</p>
+      <div class="spacer-md"></div>
+      <div class="lesson-index">
+        ${mod.lessons.map((l, i) => `
+          <a class="lesson-index-card" href="#/${mod.id}/overview/${i + 1}">
+            <span class="lesson-num">${String(i + 1).padStart(2, '0')}</span>
+            <span class="lesson-index-title">${escapeHTML(l.title)}</span>
+          </a>
+        `).join('')}
       </div>
-    `).join('')}
-    <div class="row"><a class="btn accent" href="#/${mod.id}/flashcards">Drill these → Flashcards</a></div>
+      <div class="row">
+        <a class="btn accent" href="#/${mod.id}/overview/1">Start lesson 1 →</a>
+        <a class="btn" href="#/${mod.id}">← Back to module</a>
+      </div>
+    `;
+    return;
+  }
+
+  // single lesson view
+  const idx = parseInt(sub) - 1;
+  if (isNaN(idx) || idx < 0 || idx >= mod.lessons.length) {
+    location.hash = `#/${mod.id}/overview`;
+    return;
+  }
+  const l = mod.lessons[idx];
+  const prevIdx = idx - 1;
+  const nextIdx = idx + 1;
+  const hasPrev = prevIdx >= 0;
+  const hasNext = nextIdx < mod.lessons.length;
+
+  root.innerHTML = `
+    ${crumbs(mod.title, `Lesson ${idx + 1} of ${mod.lessons.length}`)}
+    <div class="lesson-page">
+      <div class="lesson-counter">
+        <span class="mono">${String(idx + 1).padStart(2, '0')} / ${String(mod.lessons.length).padStart(2, '0')}</span>
+        <span class="progress-bar">
+          <span class="progress-fill" style="width: ${((idx + 1) / mod.lessons.length) * 100}%"></span>
+        </span>
+      </div>
+
+      <h1 class="lesson-title">${escapeHTML(l.title)}</h1>
+
+      <section class="lesson-section">
+        <h3>In plain English</h3>
+        <p>${escapeHTML(l.plain)}</p>
+      </section>
+
+      <section class="lesson-section">
+        <h3>The technical definition</h3>
+        <p>${escapeHTML(l.technical)}</p>
+      </section>
+
+      <section class="lesson-section">
+        <h3>Real-world example</h3>
+        <p>${escapeHTML(l.example)}</p>
+      </section>
+
+      <section class="lesson-section">
+        <h3>How it applies to AI</h3>
+        <p>${escapeHTML(l.ai_relevance)}</p>
+      </section>
+
+      ${l.key_terms && l.key_terms.length ? `
+        <section class="lesson-section">
+          <h3>Key terms from this lesson</h3>
+          <div class="terms">${l.key_terms.map(t => `<span class="term-chip">${escapeHTML(t)}</span>`).join('')}</div>
+        </section>
+      ` : ''}
+
+      <nav class="lesson-nav">
+        <a class="btn ${hasPrev ? '' : 'disabled'}"
+           href="${hasPrev ? `#/${mod.id}/overview/${prevIdx + 1}` : 'javascript:void(0)'}"
+           ${hasPrev ? '' : 'onclick="event.preventDefault()" aria-disabled="true"'}>
+          ${hasPrev ? `← Prev: ${escapeHTML(mod.lessons[prevIdx].title)}` : '← Start'}
+        </a>
+        <a class="btn" href="#/${mod.id}/overview">All lessons</a>
+        ${hasNext
+          ? `<a class="btn accent" href="#/${mod.id}/overview/${nextIdx + 1}">Next: ${escapeHTML(mod.lessons[nextIdx].title)} →</a>`
+          : `<a class="btn accent" href="#/${mod.id}/flashcards">Drill flashcards →</a>`
+        }
+      </nav>
+    </div>
   `;
+  // scroll to top when entering a new lesson
+  window.scrollTo({ top: 0, behavior: 'instant' });
 }
 
 // ====================================================
