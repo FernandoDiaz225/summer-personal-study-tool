@@ -191,7 +191,14 @@
     { "front": "How does System 2 map to an agent?", "back": "REASONING — slow inference reaching conclusions. Example: propositional logic, planning, search algorithms." },
     { "front": "Why can't an agent be omnipotent?", "back": "All agents are limited. Finite memory, finite time, limited sensors. They can only observe specialized, constrained domains." },
     { "front": "What is 'exploration' in the known/unknown context?", "back": "In an unknown environment, the agent must LEARN the environment's dynamics by interacting with it — this process is called exploration." },
-    { "front": "Why is chess deterministic but Go nondeterministic in this framing?", "back": "Trick: in pure game terms both are deterministic. The slides treat Go as nondeterministic in the context of AI difficulty / how agents must handle it (uncertainty in opponent modeling). Memorize what's on the table." }
+    { "front": "Why is chess deterministic but Go nondeterministic in this framing?", "back": "Trick: in pure game terms both are deterministic. The slides treat Go as nondeterministic in the context of AI difficulty / how agents must handle it (uncertainty in opponent modeling). Memorize what's on the table." },
+    { "front": "What does a rational agent SELECT? (action or perception?)", "back": "An ACTION. Perceptions are inputs the agent receives — the agent doesn't 'choose' perceptions, it chooses actions based on them." },
+    { "front": "Is recognizing a relative's face System 1 or System 2?", "back": "System 1. Instant, automatic, no conscious effort — that's the textbook System 1 example." },
+    { "front": "Is mental multiplication (e.g. 47 × 28) System 1 or System 2?", "back": "System 2. Deliberate, effortful, step-by-step computation." },
+    { "front": "Static image recognition by a CNN — what environment property is most distinctive?", "back": "EPISODIC. Each image is classified independently; previous images don't affect the current decision." },
+    { "front": "If a robot must EXPLORE to understand its environment, that environment is...", "back": "UNKNOWN. Exploration is the technical term for learning the dynamics of an unknown environment through interaction." },
+    { "front": "True or false: reasoning is typically slower than perception.", "back": "TRUE. Perception = System 1, fast (milliseconds). Reasoning = System 2, slow (seconds to minutes)." },
+    { "front": "Can a rational agent still lose? Why?", "back": "Yes. Rational means making the best decision with available info — not omniscience. If hidden info works against the agent (e.g. cards it can't see), it can be rational AND lose." }
   ],
   "quiz": [
     {
@@ -303,6 +310,114 @@
       ],
       "answer": 1,
       "explain": "That's Go from the reference table. Chess is deterministic (no randomness). Driving is partial/dynamic/continuous/unknown. Image recognition is episodic."
+    },
+    {
+      "q": "What is always a characteristic of a rational agent?",
+      "choices": [
+        "It considers a sequence of perceptions but ignores prior knowledge",
+        "It considers prior knowledge but only considers the most recent perception",
+        "It selects an action that maximizes its performance measure",
+        "It selects a perception that maximizes its performance measure"
+      ],
+      "answer": 2,
+      "explain": "A rational agent selects the ACTION (not a perception — perceptions are inputs, not choices) that maximizes its performance measure, using BOTH prior knowledge AND the full sequence of perceptions."
+    },
+    {
+      "q": "Instantly recognizing the face of a relative is an example of:",
+      "choices": [
+        "System 1 thinking",
+        "System 2 thinking",
+        "Mathematical reasoning",
+        "Determinism"
+      ],
+      "answer": 0,
+      "explain": "Face recognition happens automatically, without effort, in a fraction of a second. That's the textbook definition of System 1. Math and deliberate reasoning are System 2."
+    },
+    {
+      "q": "How would you characterize the environment in which a convolutional neural network works to recognize a static image?",
+      "choices": [
+        "Discrete",
+        "Sequential",
+        "Unknown",
+        "Episodic"
+      ],
+      "answer": 3,
+      "explain": "Static image recognition is the textbook example of an episodic environment — each image is classified independently, no past images affect the current decision. (It's also continuous and fully observable, but those weren't the options here.)"
+    },
+    {
+      "q": "How would you characterize the environment in which a robot must conduct exploration to gain an understanding of the situation?",
+      "choices": [
+        "Discrete",
+        "Fully observable",
+        "Unknown",
+        "Episodic"
+      ],
+      "answer": 2,
+      "explain": "Exploration is the term used specifically for learning in an UNKNOWN environment. If the agent already knew the dynamics, it wouldn't need to explore — it could just plan."
+    },
+    {
+      "q": "True or false: the process of 'reasoning' is typically slower than 'perception.'",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": 0,
+      "explain": "True. Perception (System 1) is fast and automatic — recognizing a face takes milliseconds. Reasoning (System 2) is slow and deliberate — planning a chess move or solving a logic puzzle takes seconds to minutes."
+    },
+    {
+      "q": "Which of the following is NOT one of the five inputs an agent has access to?",
+      "choices": [
+        "Prior knowledge",
+        "Stimuli",
+        "The performance measure itself",
+        "Past experiences"
+      ],
+      "answer": 2,
+      "explain": "The 5 inputs are: prior knowledge, stimuli, past experiences, goals/preferences, and abilities. The performance measure is how the AGENT IS JUDGED (by the designer), not something the agent itself uses as an input."
+    },
+    {
+      "q": "A self-driving car is BEST characterized as which combination?",
+      "choices": [
+        "Fully observable, deterministic, sequential, static, discrete, known",
+        "Partially observable, nondeterministic, sequential, dynamic, continuous, unknown",
+        "Partially observable, deterministic, episodic, static, continuous, known",
+        "Fully observable, nondeterministic, sequential, dynamic, discrete, known"
+      ],
+      "answer": 1,
+      "explain": "Driving is hostile on every axis: you can't see everything (partial), traffic is unpredictable (nondet), past actions matter (sequential), the world changes while you think (dynamic), positions/speeds are real numbers (continuous), and you don't fully know the dynamics (unknown). This is why it's so much harder than chess."
+    },
+    {
+      "q": "A rational agent that loses a poker hand is:",
+      "choices": [
+        "Necessarily irrational — rational agents never lose",
+        "Possibly still rational, if it made the best choice given visible information",
+        "Omniscient",
+        "Operating in a deterministic environment"
+      ],
+      "answer": 1,
+      "explain": "Rational ≠ always winning. If the agent made the statistically best bet given what it could see, it was rational. It just got unlucky with hidden cards. Rationality is about the QUALITY of the decision, not the outcome."
+    },
+    {
+      "q": "Which task is most clearly a System 2 task?",
+      "choices": [
+        "Recognizing your friend's voice over the phone",
+        "Identifying that an object is red",
+        "Multiplying 47 × 28 in your head",
+        "Catching a ball thrown at you"
+      ],
+      "answer": 2,
+      "explain": "Multiplication requires deliberate, effortful, step-by-step computation — classic System 2. The others (voice recognition, color identification, catching a ball) all happen automatically without conscious effort — System 1."
+    },
+    {
+      "q": "What does 'exploration' mean in the context of agents and environments?",
+      "choices": [
+        "Moving around in physical space",
+        "The agent learning the dynamics of an unknown environment through interaction",
+        "Searching a game tree for the best move",
+        "Switching between System 1 and System 2"
+      ],
+      "answer": 1,
+      "explain": "Exploration is a technical term: in an unknown environment, the agent must take actions to learn how the world responds. This is foundational to reinforcement learning (covered later in the course)."
     }
   ],
   "free_recall": [
