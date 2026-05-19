@@ -1,0 +1,68 @@
+{
+  "course": "CSE 471",
+  "title": "Introduction to Artificial Intelligence",
+  "units": [
+    {
+      "id": "u0",
+      "title": "Course Intro / Syllabus",
+      "modules": [
+        { "id": "m0", "title": "Module 0: Syllabus & Intro", "available": false }
+      ]
+    },
+    {
+      "id": "u1",
+      "title": "Unit 1: Agents and Logic",
+      "exam": "Proctored Exam 1",
+      "modules": [
+        { "id": "m1", "title": "Module 1: Intelligent Agents", "available": true },
+        { "id": "m2", "title": "Module 2: Propositional Logic", "available": false },
+        { "id": "m3", "title": "Module 3: First-Order Logic", "available": false },
+        { "id": "m4", "title": "Module 4: Knowledge Representation", "available": false }
+      ]
+    },
+    {
+      "id": "u2",
+      "title": "Unit 2: Search",
+      "exam": "Proctored Exam 2",
+      "modules": [
+        { "id": "m5", "title": "Module 5", "available": false },
+        { "id": "m6", "title": "Module 6", "available": false },
+        { "id": "m7", "title": "Module 7", "available": false },
+        { "id": "m8", "title": "Module 8", "available": false }
+      ]
+    },
+    {
+      "id": "u3",
+      "title": "Unit 3: Uncertainty",
+      "exam": "Proctored Exam 3",
+      "modules": [
+        { "id": "m9", "title": "Module 9", "available": false },
+        { "id": "m10", "title": "Module 10", "available": false },
+        { "id": "m11", "title": "Module 11", "available": false },
+        { "id": "m12", "title": "Module 12", "available": false }
+      ]
+    },
+    {
+      "id": "u4",
+      "title": "Unit 4: Machine Learning",
+      "exam": "Proctored Exam 4 (Respondus Lockdown)",
+      "modules": [
+        { "id": "m13", "title": "Module 13", "available": false },
+        { "id": "m14", "title": "Module 14", "available": false },
+        { "id": "m15", "title": "Module 15", "available": false }
+      ]
+    },
+    {
+      "id": "u5",
+      "title": "Unit 5: Deep Learning",
+      "exam": "Proctored Exam 5 (Respondus Lockdown)",
+      "modules": [
+        { "id": "m16", "title": "Module 16", "available": false },
+        { "id": "m17", "title": "Module 17", "available": false },
+        { "id": "m18", "title": "Module 18", "available": false },
+        { "id": "m19", "title": "Module 19", "available": false },
+        { "id": "m20", "title": "Module 20", "available": false }
+      ]
+    }
+  ]
+}

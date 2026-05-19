@@ -1,0 +1,241 @@
+{
+  "id": "m1",
+  "title": "Module 1: Intelligent Agents",
+  "overview": "Agents perceive, reason, act. A rational agent picks the action that maximizes its performance measure given what it knows and has seen. Environments differ along six axes. Perception is fast (System 1); reasoning is slow (System 2). Everything in this module connects through one loop: sensor → perceive → reason → act → environment changes → repeat.",
+  "lessons": [
+    {
+      "id": "l1",
+      "title": "1. What is an Agent?",
+      "summary": "An agent is anything that acts in an environment. Thermostats, dogs, robots, humans, companies all count. Agents are judged only by what they DO, not what they are. They have access to exactly 5 things: prior knowledge, stimuli, past experiences, goals/preferences, abilities.",
+      "key_terms": ["agent", "environment", "computational agent", "stimuli", "belief state"]
+    },
+    {
+      "id": "l2",
+      "title": "2. The Perception-Action Loop",
+      "summary": "Sensor input flows from environment to agent. The agent perceives, reasons, then takes an action. The action changes the environment, which produces new sensor input. This loop is the foundation of every other concept in the module.",
+      "key_terms": ["perception", "reasoning", "action", "sensor input"]
+    },
+    {
+      "id": "l3",
+      "title": "3. The Rational Agent",
+      "summary": "An agent is RATIONAL if, given a sequence of perceptions and prior knowledge, it picks the action that maximizes its performance measure. Four factors: (1) performance measure, (2) prior knowledge, (3) sequence of perceptions, (4) possible actions. Rational does NOT mean omniscient.",
+      "key_terms": ["rational agent", "performance measure", "prior knowledge", "perceptions", "possible actions"]
+    },
+    {
+      "id": "l4",
+      "title": "4. Six Environmental Properties",
+      "summary": "Every environment can be classified on six axes: fully/partially observable, deterministic/nondeterministic, episodic/sequential, static/dynamic, discrete/continuous, known/unknown. Knowing these tells you what kind of AI techniques you'll need.",
+      "key_terms": ["observable", "deterministic", "episodic", "static", "discrete", "known"]
+    },
+    {
+      "id": "l5",
+      "title": "5. Classifying Real Environments",
+      "summary": "Chess: fully obs, deterministic, sequential, static, discrete, known. Poker: partial, nondet, sequential, static, discrete, known. Go: full, nondet, sequential, static, discrete, known. Driving: partial, nondet, sequential, dynamic, continuous, unknown. Monopoly: full, nondet, sequential, dynamic, discrete, known. Static image recognition: full, deterministic, episodic, static, continuous, known.",
+      "key_terms": ["chess", "poker", "go", "driving", "monopoly", "image recognition"]
+    },
+    {
+      "id": "l6",
+      "title": "6. Thinking Fast and Slow",
+      "summary": "Kahneman's dual-system theory. System 1 = fast, automatic, no effort (recognizing colors, faces). System 2 = slow, effortful, deliberate (math, planning, breaking a code). Both systems work together — System 1 handles routine perception, System 2 kicks in for hard problems.",
+      "key_terms": ["System 1", "System 2", "Kahneman", "dual process"]
+    },
+    {
+      "id": "l7",
+      "title": "7. Connecting Systems to Agents",
+      "summary": "In an agent-based system: PERCEPTION ≈ System 1 (fast, e.g., CNNs interpreting sensor input). REASONING ≈ System 2 (slow, e.g., propositional logic, planning). Modern AI combines both — fast pattern recognition feeds slow symbolic reasoning. This is the whole point of the module: it ties the agent loop to cognitive science.",
+      "key_terms": ["perception as System 1", "reasoning as System 2", "CNN", "propositional logic"]
+    }
+  ],
+  "flashcards": [
+    { "front": "Define: agent", "back": "Something that acts in an environment. Judged solely by its actions." },
+    { "front": "Define: rational agent", "back": "An agent that, given a sequence of perceptions and prior knowledge, selects an action that maximizes its performance measure." },
+    { "front": "The 4 key factors of a rational agent", "back": "(1) Performance measure (2) Prior knowledge (3) Sequence of perceptions (4) Possible actions" },
+    { "front": "What are the 5 inputs an agent has access to?", "back": "Prior knowledge, stimuli, past experiences, goals/preferences, abilities" },
+    { "front": "Rational vs. omniscient — what's the difference?", "back": "Rational = does the best it can with what it knows. Omniscient = knows everything. A rational agent can fail; it just has to make the best choice with available info." },
+    { "front": "The 6 environmental properties", "back": "Fully/partially observable, deterministic/nondeterministic, episodic/sequential, static/dynamic, discrete/continuous, known/unknown" },
+    { "front": "Fully vs. partially observable — definition + example", "back": "Fully = agent sees the whole environment (chess). Partially = only part is visible (poker — you can't see opponent's cards)." },
+    { "front": "Deterministic vs. nondeterministic", "back": "Deterministic = same action always produces same result (chess). Nondeterministic = randomness or probability involved (Monopoly with dice, poker with shuffled deck)." },
+    { "front": "Episodic vs. sequential", "back": "Episodic = current decision doesn't depend on past actions (static image classification). Sequential = past actions matter (chess, driving)." },
+    { "front": "Static vs. dynamic", "back": "Static = environment doesn't change while agent is thinking (poker, chess). Dynamic = environment changes regardless of agent (driving, real world)." },
+    { "front": "Discrete vs. continuous", "back": "Discrete = finite number of states (chess board positions). Continuous = infinite states (driving, image pixels, sensor readings)." },
+    { "front": "Known vs. unknown", "back": "Known = agent knows how environment evolves / rules (chess). Unknown = agent must learn dynamics via EXPLORATION (real-world driving)." },
+    { "front": "Classify CHESS on all 6 axes", "back": "Fully observable, deterministic, sequential, static, discrete, known" },
+    { "front": "Classify POKER on all 6 axes", "back": "Partially observable, nondeterministic, sequential, static, discrete, known" },
+    { "front": "Classify GO on all 6 axes", "back": "Fully observable, nondeterministic, sequential, static, discrete, known" },
+    { "front": "Classify DRIVING on all 6 axes", "back": "Partially observable, nondeterministic, sequential, dynamic, continuous, unknown" },
+    { "front": "Classify MONOPOLY on all 6 axes", "back": "Fully observable, nondeterministic, sequential, dynamic, discrete, known" },
+    { "front": "Classify STATIC IMAGE RECOGNITION on all 6 axes", "back": "Fully observable, deterministic, episodic, static, continuous, known" },
+    { "front": "Define: System 1 (Kahneman)", "back": "Fast, automatic, effortless thinking. No sense of voluntary control. Recognizing colors, faces, simple patterns." },
+    { "front": "Define: System 2 (Kahneman)", "back": "Slow, effortful, deliberate thinking. Demands attention. Complex computations, planning, code-breaking." },
+    { "front": "How does System 1 map to an agent?", "back": "PERCEPTION — fast interpretation of sensor input. Example: CNNs classifying images." },
+    { "front": "How does System 2 map to an agent?", "back": "REASONING — slow inference reaching conclusions. Example: propositional logic, planning, search algorithms." },
+    { "front": "Why can't an agent be omnipotent?", "back": "All agents are limited. Finite memory, finite time, limited sensors. They can only observe specialized, constrained domains." },
+    { "front": "What is 'exploration' in the known/unknown context?", "back": "In an unknown environment, the agent must LEARN the environment's dynamics by interacting with it — this process is called exploration." },
+    { "front": "Why is chess deterministic but Go nondeterministic in this framing?", "back": "Trick: in pure game terms both are deterministic. The slides treat Go as nondeterministic in the context of AI difficulty / how agents must handle it (uncertainty in opponent modeling). Memorize what's on the table." }
+  ],
+  "quiz": [
+    {
+      "q": "An agent is rational if it...",
+      "choices": [
+        "Knows everything about its environment",
+        "Selects the action that maximizes its performance measure given its perceptions and prior knowledge",
+        "Always achieves its goal",
+        "Acts the same way a human would"
+      ],
+      "answer": 1,
+      "explain": "Rationality is about choosing the best action given what you have — perceptions + prior knowledge — not about being omniscient or always succeeding."
+    },
+    {
+      "q": "Which is NOT one of the four key factors of a rational agent?",
+      "choices": [
+        "Performance measure",
+        "Prior knowledge",
+        "Emotional state",
+        "Possible actions"
+      ],
+      "answer": 2,
+      "explain": "The four factors are performance measure, prior knowledge, sequence of perceptions, and possible actions. Emotional state isn't part of the formal definition."
+    },
+    {
+      "q": "Poker is partially observable because...",
+      "choices": [
+        "The deck has randomness",
+        "Players can't see each other's hidden cards",
+        "The rules change",
+        "It uses continuous state"
+      ],
+      "answer": 1,
+      "explain": "Observability is about what the agent can SEE. Hidden cards = partial observability. Randomness is a separate property (nondeterminism)."
+    },
+    {
+      "q": "Which environment is episodic?",
+      "choices": [
+        "Chess",
+        "Driving a car",
+        "Static image recognition",
+        "Playing Monopoly"
+      ],
+      "answer": 2,
+      "explain": "Episodic = current decision doesn't depend on past actions. Classifying one image doesn't depend on the previous image. Games are sequential."
+    },
+    {
+      "q": "Which is a System 1 task?",
+      "choices": [
+        "Solving a quadratic equation",
+        "Planning a 3-step chess combo",
+        "Recognizing the color of a circle",
+        "Breaking a code"
+      ],
+      "answer": 2,
+      "explain": "System 1 = fast, automatic. Color recognition happens instantly without conscious effort. The others all require deliberate computation (System 2)."
+    },
+    {
+      "q": "An environment is 'unknown' when...",
+      "choices": [
+        "The agent has no sensors",
+        "The agent does not know how the environment evolves and must learn it",
+        "The environment is invisible",
+        "There are too many states"
+      ],
+      "answer": 1,
+      "explain": "Known/unknown is about the agent's knowledge of the dynamics/rules. Unknown environments require exploration to learn how things work."
+    },
+    {
+      "q": "Driving a car is classified as continuous because...",
+      "choices": [
+        "It happens over a long time",
+        "There are infinitely many possible sensor values and positions",
+        "It is dangerous",
+        "The rules of the road change"
+      ],
+      "answer": 1,
+      "explain": "Continuous = infinite number of possible states. Speed, position, steering angle are all continuous values, not discrete categories."
+    },
+    {
+      "q": "In agent-based AI, perception maps most closely to...",
+      "choices": [
+        "System 2 — slow, deliberate reasoning",
+        "System 1 — fast, automatic pattern recognition",
+        "Goal-setting",
+        "Action selection"
+      ],
+      "answer": 1,
+      "explain": "Perception is fast pattern-matching on sensor input (think CNNs). That maps to Kahneman's System 1."
+    },
+    {
+      "q": "A static environment means...",
+      "choices": [
+        "The agent doesn't move",
+        "The environment doesn't change while the agent is deciding what to do",
+        "There's no randomness",
+        "It's a discrete environment"
+      ],
+      "answer": 1,
+      "explain": "Static = doesn't change during the agent's deliberation. Chess board doesn't move while you think. A car driving past you in traffic does — that's dynamic."
+    },
+    {
+      "q": "Which environment is fully observable, nondeterministic, sequential, static, discrete, and known?",
+      "choices": [
+        "Chess",
+        "Go",
+        "Driving",
+        "Static image recognition"
+      ],
+      "answer": 1,
+      "explain": "That's Go from the reference table. Chess is deterministic (no randomness). Driving is partial/dynamic/continuous/unknown. Image recognition is episodic."
+    }
+  ],
+  "free_recall": [
+    {
+      "prompt": "List the 4 key factors of a rational agent.",
+      "accept": ["performance measure", "prior knowledge", "perceptions", "actions"],
+      "ideal": "Performance measure, prior knowledge, sequence of perceptions, possible actions."
+    },
+    {
+      "prompt": "List the 6 environmental properties.",
+      "accept": ["observable", "deterministic", "episodic", "static", "discrete", "known"],
+      "ideal": "Fully/partially observable, deterministic/nondeterministic, episodic/sequential, static/dynamic, discrete/continuous, known/unknown."
+    },
+    {
+      "prompt": "What is the formal definition of a rational agent?",
+      "accept": ["maximize", "performance", "perception", "knowledge"],
+      "ideal": "An agent is rational if, given a sequence of perceptions and prior knowledge, it selects an action that maximizes its performance measure."
+    },
+    {
+      "prompt": "Give one example of a System 1 task and one example of a System 2 task.",
+      "accept": ["color", "face", "recognize", "math", "plan", "logic", "code"],
+      "ideal": "System 1: recognizing a color or a face. System 2: solving math, planning, breaking a code."
+    },
+    {
+      "prompt": "How do System 1 and System 2 map onto an agent's architecture?",
+      "accept": ["perception", "reasoning", "system 1", "system 2"],
+      "ideal": "Perception (fast, e.g. CNNs) is System 1. Reasoning (slow, e.g. propositional logic) is System 2. They work together: perception interprets sensor input quickly, then reasoning takes over for harder inferences."
+    }
+  ],
+  "matching": {
+    "instructions": "Match each environment to its correct property values (drag the chips).",
+    "properties": ["Observability", "Determinism", "Episodicity", "Dynamics", "States", "Knowledge"],
+    "environments": [
+      { "name": "Chess", "values": ["Fully observable", "Deterministic", "Sequential", "Static", "Discrete", "Known"] },
+      { "name": "Poker", "values": ["Partially observable", "Nondeterministic", "Sequential", "Static", "Discrete", "Known"] },
+      { "name": "Go", "values": ["Fully observable", "Nondeterministic", "Sequential", "Static", "Discrete", "Known"] },
+      { "name": "Driving", "values": ["Partially observable", "Nondeterministic", "Sequential", "Dynamic", "Continuous", "Unknown"] },
+      { "name": "Monopoly", "values": ["Fully observable", "Nondeterministic", "Sequential", "Dynamic", "Discrete", "Known"] },
+      { "name": "Image Recognition", "values": ["Fully observable", "Deterministic", "Episodic", "Static", "Continuous", "Known"] }
+    ]
+  },
+  "review_sheet": [
+    {
+      "q": "What is required for an agent to be considered rational?",
+      "a": "Given a sequence of perceptions and prior knowledge, the agent must select an action that maximizes its performance measure. The 4 factors: performance measure, prior knowledge, sequence of perceptions, possible actions. Note: rational ≠ omniscient — the agent does the best it can with what it has."
+    },
+    {
+      "q": "How do you define an environment across six major environmental properties? Give examples where they differ.",
+      "a": "The six properties: (1) Fully vs. partially observable — chess (full) vs. poker (partial). (2) Deterministic vs. nondeterministic — chess (det) vs. Monopoly with dice (nondet). (3) Episodic vs. sequential — image classification (episodic) vs. chess (sequential). (4) Static vs. dynamic — poker (static) vs. driving (dynamic). (5) Discrete vs. continuous — chess board (discrete) vs. driving (continuous). (6) Known vs. unknown — chess rules (known) vs. real-world driving (unknown, requires exploration)."
+    },
+    {
+      "q": "What is the difference between System 1 and System 2? Examples of each? How do they work together?",
+      "a": "System 1 = fast, automatic, effortless (recognizing colors, faces, simple patterns). System 2 = slow, deliberate, effortful (math, planning, logical reasoning, breaking a code). In an agent: System 1 = perception (e.g., CNNs interpreting sensor input). System 2 = reasoning (e.g., propositional logic, planning). They work together: System 1 handles routine perception quickly, then System 2 kicks in for harder problems that need deliberate inference. Modern AI combines both."
+    }
+  ]
+}
